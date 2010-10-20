@@ -1,0 +1,4 @@
+:l src/Main.hs
+quickCheck prop_RevUnit
+quickCheck prop_RevApp
+quickCheck prop_RevRev
