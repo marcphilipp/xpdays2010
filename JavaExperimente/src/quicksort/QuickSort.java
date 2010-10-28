@@ -5,52 +5,64 @@ import java.util.List;
 
 public class QuickSort {
 
-	static class Partition {
+	protected class Partition<T extends Comparable<T>> {
 
-		private final List<Integer> smaller;
-		private final List<Integer> larger;
+		private final T pivot;
+		private final List<T> smaller, larger;
 
-		Partition(List<Integer> list, Integer pivot) {
-			smaller = new ArrayList<Integer>();
-			larger = new ArrayList<Integer>();
-			for (Integer x : list) {
-				if (x.intValue() < pivot.intValue()) {
-					smaller.add(x);
+		public Partition(List<T> all, T pivot) {
+			this.pivot = pivot;
+			smaller = newList();
+			larger = newList();
+			for (T item : all) {
+				if (item.compareTo(pivot) < 0) {
+					smaller.add(item);
 				} else {
-					larger.add(x);
+					larger.add(item);
 				}
 			}
 		}
 
-		public List<Integer> smaller() {
+		public T pivot() {
+			return pivot;
+		}
+
+		public List<T> smaller() {
 			return smaller;
 		}
 
-		public List<Integer> larger() {
+		public List<T> larger() {
 			return larger;
 		}
-
 	}
 
-	public static List<Integer> sort(List<Integer> list) {
+	public <T extends Comparable<T>> List<T> sort(List<T> list) {
 		if (list.isEmpty()) {
-			return new ArrayList<Integer>();
+			return newList();
 		}
 		return sortNonEmpty(list);
 	}
 
-	private static List<Integer> sortNonEmpty(List<Integer> list) {
-		Integer pivot = list.get(0);
-		Partition partition = new Partition(list.subList(1, list.size()), pivot);
-		return concat(sort(partition.smaller()), pivot, sort(partition.larger()));
+	protected <T> List<T> newList() {
+		return new ArrayList<T>();
 	}
 
-	private static <T> List<T> concat(List<T> smaller, T pivot, List<T> larger) {
+	protected <T extends Comparable<T>> List<T> sortNonEmpty(List<T> list) {
+		Partition<T> partition = split(list);
+		return concat(sort(partition.smaller()), partition.pivot(), sort(partition.larger()));
+	}
+
+	private <T extends Comparable<T>> Partition<T> split(List<T> list) {
+		T pivot = list.get(0);
+		List<T> tail = list.subList(1, list.size());
+		return new Partition<T>(tail, pivot);
+	}
+
+	private <T> List<T> concat(List<T> smaller, T pivot, List<T> larger) {
 		List<T> result = new ArrayList<T>();
 		result.addAll(smaller);
 		result.add(pivot);
 		result.addAll(larger);
 		return result;
 	}
-
 }

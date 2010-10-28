@@ -12,24 +12,26 @@ import quicksort.QuickSort;
 
 public class QuickSortTest {
 
+	private QuickSort quick = new QuickSort();
+	
 	@Test
 	public void emptyList() throws Exception {
-		assertEquals(Collections.emptyList(), QuickSort.sort(new ArrayList<Integer>()));
+		assertEquals(Collections.emptyList(), quick.sort(new ArrayList<Integer>()));
 	}
 	
 	@Test
 	public void sortierteListe() throws Exception {
-		assertEquals(asList(1, 2, 3), QuickSort.sort(asList(1, 2, 3)));
+		assertEquals(asList(1, 2, 3), quick.sort(asList(1, 2, 3)));
 	}
 	
 	@Test
 	public void unsortierteListe() throws Exception {
-		assertEquals(asList(1, 2, 3), QuickSort.sort(asList(2, 1, 3)));
+		assertEquals(asList(1, 2, 3), quick.sort(asList(2, 1, 3)));
 	}
 	
 	@Test
 	public void mehrereGleicheElemente() throws Exception {
-		assertEquals(asList(1, 1, 2, 2, 3, 3), QuickSort.sort(asList(2, 1, 3, 2, 1, 3)));
+		assertEquals(asList(1, 1, 2, 2, 3, 3), quick.sort(asList(2, 1, 3, 2, 1, 3)));
 	}
 	
 	
