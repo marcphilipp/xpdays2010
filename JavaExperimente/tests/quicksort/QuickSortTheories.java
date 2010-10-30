@@ -1,10 +1,10 @@
-package theories;
+package quicksort;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static theories.Utils.countAndRemove;
-import static theories.Utils.list;
-import static theories.Utils.ordered;
+import static quicksort.Utils.countAndRemove;
+import static quicksort.Utils.list;
+import static quicksort.Utils.ordered;
 
 import java.util.List;
 
@@ -12,8 +12,6 @@ import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
-
-import quicksort.QuickSort;
 
 @RunWith(Theories.class)
 public class QuickSortTheories {

@@ -1,4 +1,4 @@
-package junittests;
+package quicksort;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;

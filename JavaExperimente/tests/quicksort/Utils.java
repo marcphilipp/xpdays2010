@@ -1,4 +1,4 @@
-package theories;
+package quicksort;
 
 import static java.util.Collections.nCopies;
 
