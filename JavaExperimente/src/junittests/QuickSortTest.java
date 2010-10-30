@@ -1,10 +1,10 @@
 package junittests;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.*;
+import static java.util.Collections.emptyList;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.junit.Test;
 
@@ -15,8 +15,8 @@ public class QuickSortTest {
 	private QuickSort quick = new QuickSort();
 	
 	@Test
-	public void emptyList() throws Exception {
-		assertEquals(Collections.emptyList(), quick.sort(new ArrayList<Integer>()));
+	public void leereListe() throws Exception {
+		assertEquals(emptyList(), quick.sort(new ArrayList<Integer>()));
 	}
 	
 	@Test

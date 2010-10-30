@@ -14,6 +14,10 @@ public class QuickSort {
 			this.pivot = pivot;
 			smaller = newList();
 			larger = newList();
+			split(all, pivot);
+		}
+
+		private void split(List<T> all, T pivot) {
 			for (T item : all) {
 				if (item.compareTo(pivot) < 0) {
 					smaller.add(item);
