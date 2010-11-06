@@ -19,4 +19,21 @@ object TestHelpers {
         xInLeft.size == xInRight.size && haveSameElements(leftRemainder, rightRemainder)
     }
   }
+  
+  def equalItemsHaveSameOrder[T <% Ordered[T]](left: List[T], right: List[T]): Boolean = {
+    left match {
+      case Nil => right.isEmpty
+      case x :: xs =>
+        val (xInLeft, leftRemainder) = left partition (_ == x)
+        val (xInRight, rightRemainder) = right partition (_ == x)
+        sameElements(xInLeft, xInRight) && equalItemsHaveSameOrder(leftRemainder, rightRemainder)
+    }
+  }
+  
+  def sameElements[T <% Ordered[T]](left: List[T], right: List[T]): Boolean = {
+    left match {
+      case Nil => right.isEmpty
+      case x :: xs => x == right.head && sameElements(xs, right.tail)
+    }
+  }
 }

@@ -25,5 +25,9 @@ class QuickSortTest extends Spec with ShouldMatchers with Checkers {
     it("retains the same elements") {
       check((xs: List[Int]) => haveSameElements(xs, quickSort(xs)))
     }
+
+    it("is stable") {
+      check((xs: List[Int]) => equalItemsHaveSameOrder(xs, quickSort(xs)))
+    }
   }
 }
