@@ -1,0 +1,60 @@
+\documentclass[utf8]{beamer}
+%\usetheme{andrena}
+\setbeamercovered{dynamic}
+
+\AtBeginPart{\frame{\partpage}}
+
+\author{Nicole Rauch, Marc Philipp}
+\title{Unit Tests als Spezifikation?}
+\subtitle{~}
+\institute{andrena objects ag}
+\date{26. November 2010}
+
+\usepackage{ngerman}
+%\usepackage[utf8x,utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[scaled=0.82]{beramono} % bitstream vera sans mono
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds,mindmap}
+
+\definecolor[named]{keywords}{HTML}{005D35}
+\definecolor[named]{comments}{HTML}{808080}
+\definecolor[named]{identifiers}{HTML}{FF0000}
+\definecolor[named]{blockbackground}{HTML}{F1EEE9}
+\setbeamercolor{blockbackground}{bg=blockbackground}
+\definecolor[named]{strings}{HTML}{0000FF}
+\usepackage[final]{listings}
+\lstset{language=Java,
+	keywordstyle=\color{keywords},%\bfseries,%RoyalBlue
+	basicstyle=\scriptsize\ttfamily,
+	%identifierstyle=\color{identifiers},
+	commentstyle=\color{comments}\ttfamily\itshape,%Green
+	stringstyle=\color{strings},
+	%numbers=left,
+	%numberstyle=\scriptsize,%\tiny
+	%stepnumber=1,
+	%numbersep=8pt,
+	showstringspaces=false,
+	breaklines=true,
+	frameround=ffff,
+	frame=single,
+	tabsize=3,
+	backgroundcolor=\color{blockbackground},
+	rulecolor=\color{blockbackground},
+	inputencoding=latin1,
+	emphstyle=\color{red},
+	texcl=true,
+}
+
+\begin{document}
+{
+%	\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{background-title.png}}
+	\begin{frame}[t,plain]
+		\titlepage
+	\end{frame}
+}
+\include{content}
+\end{document}
+

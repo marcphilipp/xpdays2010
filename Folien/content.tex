@@ -1,0 +1,33 @@
+\begin{frame}{TODO}
+\end{frame}
+
+\begin{frame}{Theories}
+	\begin{itemize}
+		\item Neu seit Version 4.4
+		\item Parametrisierte Testmethode mit Vorbedingungen (Assumptions)
+			\begin{itemize}
+				\item \texttt{assumeThat()}
+				\item \texttt{assumeTrue()}
+				\item \texttt{assumeNotNull()}
+			\end{itemize}
+		\item \texttt{@Theory} statt \texttt{@Test}
+		\item Input für Testmethoden über \texttt{@DataPoint}(\texttt{s})-Annotation
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Herkömmliche Tests vs. Theories}
+	\begin{itemize}
+		\item Herkömmliche Tests benutzen Beispiele:
+			\begin{itemize}
+				\item Überprüfung des Verhaltens unter ausgewählten Eingaben
+				\item Beispiele sind (hoffentlich) charakteristisch
+			\end{itemize}
+		\item Eine Theory verallgemeinert eine Menge von Tests:
+			\begin{itemize}
+				\item Vorbedingung wird explizit angegeben
+				\item Sollte für alle Eingaben gelten, die Vorbedingungen erfüllen
+			\end{itemize}
+		\item Eingabewerte können explizit angegeben werden oder automatisch erzeugt werden
+	\end{itemize}
+\end{frame}
+
