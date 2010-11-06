@@ -33,7 +33,7 @@ object TestHelpers {
   def sameElements[T <% Ordered[T]](left: List[T], right: List[T]): Boolean = {
     left match {
       case Nil => right.isEmpty
-      case x :: xs => x == right.head && sameElements(xs, right.tail)
+      case x :: xs => (x eq right.head) && sameElements(xs, right.tail)
     }
   }
 }

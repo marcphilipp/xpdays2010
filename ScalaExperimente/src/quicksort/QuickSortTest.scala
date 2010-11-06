@@ -10,7 +10,7 @@ import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.prop.Checkers
 
 @RunWith(classOf[JUnitRunner])
-class QuickSortTest extends Spec with ShouldMatchers with Checkers {
+class QuickSortTest extends Spec with Checkers {
 
   describe("QuickSort") {
 
