@@ -20,11 +20,16 @@ public class AdressverwaltungUnitTests {
 	}
 
 	@Test
+	public void personWithoutAddressesDoesNotKnowAnyAddresses() {
+		Person person = personWithoutAddresses();
+		Address unknown = new Address();
+		assertFalse(person.knows(unknown));
+	}
+
+	@Test
 	public void assignNewAddressToPersonWithoutAddresses() {
 		Person person = personWithoutAddresses();
 		Address address = new Address();
-		assertFalse(person.knows(address));
-		assertEquals(0, person.numberOfAddresses());
 
 		person.assign(address);
 
@@ -33,11 +38,27 @@ public class AdressverwaltungUnitTests {
 	}
 
 	@Test
+	public void personWithAddressOnlyKnowsItsAddress() {
+		Person person = new Person();
+		Address known = new Address();
+		Address unknown = new Address();
+
+		person.assign(known);
+
+		assertTrue(person.knows(known));
+		assertFalse(person.knows(unknown));
+	}
+
+	@Test
+	public void personCountsItsAddresses() {
+		assertEquals(0, personWithoutAddresses().numberOfAddresses());
+		assertEquals(2, personWithTwoAddresses().numberOfAddresses());
+	}
+
+	@Test
 	public void assignNewAddressToPersonWithAddresses() {
 		Person person = personWithTwoAddresses();
 		Address address = new Address();
-		assertFalse(person.knows(address));
-		assertEquals(2, person.numberOfAddresses());
 
 		person.assign(address);
 
@@ -74,7 +95,7 @@ public class AdressverwaltungUnitTests {
 	@Test
 	public void assignNullAddressToPersonWithoutAddresses() {
 		Person person = personWithoutAddresses();
-		
+
 		person.assign(null);
 
 		assertFalse(person.knows(null));
@@ -84,7 +105,7 @@ public class AdressverwaltungUnitTests {
 	@Test
 	public void assignNullAddressToPersonWithAddresses() {
 		Person person = personWithTwoAddresses();
-		
+
 		person.assign(null);
 
 		assertFalse(person.knows(null));

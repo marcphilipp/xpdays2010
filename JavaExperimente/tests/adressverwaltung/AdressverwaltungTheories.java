@@ -51,7 +51,7 @@ public class AdressverwaltungTheories {
 
 	@Theory(nullsAccepted = false)
 	public void assignNewAddressToPerson(Person person, Address address) {
-		assumeFalse(person.knows(address));
+		AdditionalAssumes.assumeFalse(person.knows(address));
 		int numberOfKnownAddresses = person.numberOfAddresses();
 
 		person.assign(address);
@@ -83,7 +83,7 @@ public class AdressverwaltungTheories {
 
 	@Theory
 	public void deleteUnknownAddressFromPerson(Person person, Address address) {
-		assumeFalse(person.knows(address));
+		AdditionalAssumes.assumeFalse(person.knows(address));
 		int numberOfKnownAddresses = person.numberOfAddresses();
 
 		person.remove(address);
@@ -105,7 +105,7 @@ public class AdressverwaltungTheories {
 
 	@Theory
 	public void displayNoAddressFromPersonWithoutAddress(Person person) {
-		assumeEquals(0, person.numberOfAddresses());
+		AdditionalAssumes.assumeEquals(0, person.numberOfAddresses());
 
 		Collection<Address> addresses = person.displayAddresses();
 
@@ -123,14 +123,6 @@ public class AdressverwaltungTheories {
 		for (Address address : addresses) {
 			assertTrue(person.knows(address));
 		}
-	}
-
-	public static void assumeFalse(boolean value) {
-		assumeTrue(!value);
-	}
-
-	public static void assumeEquals(int i, int j) {
-		assumeTrue(i == j);
 	}
 
 }
