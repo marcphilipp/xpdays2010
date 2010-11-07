@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ScalaCheck"/>
+	<classpathentry kind="lib" path="/ScalaCheck/lib/scalatest-1.2.jar"/>
+	<classpathentry kind="lib" path="/ScalaCheck/lib/scalacheck_2.8.0-1.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
