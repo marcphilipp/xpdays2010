@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Person {
 
-	private Set<Address> addresses = new HashSet<Address>();
+	private final Set<Address> addresses = new HashSet<Address>();
 
 	public boolean knows(Address address) {
 		return addresses.contains(address);
@@ -30,5 +30,4 @@ public class Person {
 	public Collection<Address> displayAddresses() {
 		return Collections.unmodifiableSet(addresses);
 	}
-
 }

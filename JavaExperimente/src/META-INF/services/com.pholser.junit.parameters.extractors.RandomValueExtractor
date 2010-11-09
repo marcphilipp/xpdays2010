@@ -1,1 +1,3 @@
 bank.BigDecimalExtractor
+adressverwaltung.AddressExtractor
+adressverwaltung.PersonExtractor
