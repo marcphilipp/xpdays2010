@@ -9,5 +9,7 @@ class Address(val strasse : String, val ort : String) {
 		case _ => false
 	}
 	
+	override def toString = strasse + ", " + ort
+	
 	override def hashCode = strasse.hashCode + ort.hashCode
 }

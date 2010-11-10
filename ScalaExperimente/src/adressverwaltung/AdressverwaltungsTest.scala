@@ -14,7 +14,7 @@ class AdressverwaltungsTest extends Spec with Checkers {
   describe("Person") {
 
     it("hat keine Adresse, bekommt neue Adresse") {
-    	val person = new Person()
+    	val person = new Person("Peter")
     	  val newAddress = new Address("Ludwigstr. 5", "75045 Walzbachtal")
     	  person assign newAddress
     	  assert(person knows newAddress)
@@ -22,7 +22,7 @@ class AdressverwaltungsTest extends Spec with Checkers {
     }
 
       it("hat keine Adresse, bekommt neue Adresse zweimal") {
-    	val person = new Person()
+    	val person = new Person("Peter")
     	  val newAddress = new Address("Ludwigstr. 5", "75045 Walzbachtal")
     	  person assign newAddress
     	  person assign newAddress
@@ -31,14 +31,14 @@ class AdressverwaltungsTest extends Spec with Checkers {
     }
 
       it("hat keine Adresse, bekommt zweimal dieselbe Adresse") {
-    	val person = new Person()
+    	val person = new Person("Peter")
     	  person assign new Address("Ludwigstr. 5", "75045 Walzbachtal")
     	  person assign new Address("Ludwigstr. 5", "75045 Walzbachtal")
     	  assert(person.numberOfAddresses == 1)
     }
 
       it("hat schon Adressen, bekommt neue Adresse") {
-    	val person = new Person()
+    	val person = new Person("Peter")
     	  person assign new Address("Albert-Nestler-Str. 11", "76131 Karlsruhe")
     	  person assign new Address("Werthmannstr. 10", "76131 Karlsruhe")
     	
@@ -49,7 +49,7 @@ class AdressverwaltungsTest extends Spec with Checkers {
     }
       
       it("findet eine vorhandene Adresse"){
-    	  val person = new Person()
+    	  val person = new Person("Peter")
     	  person assign new Address("Ludwigstr. 5", "75045 Walzbachtal")
 
     	   val foundAddresses = person findAddressContaining "Ludwig"
@@ -58,7 +58,7 @@ class AdressverwaltungsTest extends Spec with Checkers {
       }
       
       it("findet mehrere vorhandene Adressen"){
-    	  val person = new Person()
+    	  val person = new Person("Peter")
     	  person assign new Address("Ludwigstr. 5", "75045 Walzbachtal")
     	  person assign new Address("Germanenstr. 5", "75045 Walzbachtal")
     	  person assign new Address("Weidenweg 5", "75045 Ludwigslust")
@@ -71,7 +71,7 @@ class AdressverwaltungsTest extends Spec with Checkers {
       }
       
       it("findet keine nicht vorhandene Adresse"){
-    	  val person = new Person()
+    	  val person = new Person("Peter")
     	  person assign new Address("Ludwigstr. 5", "75045 Walzbachtal")
 
     	   val foundAddresses = person findAddressContaining "Weg"

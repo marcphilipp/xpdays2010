@@ -2,7 +2,7 @@ package adressverwaltung
 
 import scala.collection.immutable._
 
-class Person {
+class Person(name:String) {
 	
 	private var addresses : List[Address] = Nil
 	
@@ -22,4 +22,5 @@ class Person {
    def findAddressContaining (part : String) = 
 	   addresses filter (address => address contains part)
 
+	override def toString = name
 }
