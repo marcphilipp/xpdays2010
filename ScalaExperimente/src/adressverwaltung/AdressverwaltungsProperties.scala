@@ -11,18 +11,14 @@ import org.scalatest.prop.Checkers
 @RunWith(classOf[JUnitRunner])
 class AdressverwaltungsProperties extends Spec with Checkers with ShouldMatchers {
 	
-	val address = new Address("Strasse", "Ort")
-	
-	def createPeter = new Person("Peter")
-	def createPaul : Person = {
-		val person = new Person("Paul")
-		person assign address
-		return person
+	val persons = for(name <- Arbitrary.arbitrary[String]) yield new Person(name)
+	val addresses = for {
+		street <- Arbitrary.arbitrary[String] 
+		city <- Arbitrary.arbitrary[String]
 	}
-	
-	val addresses = Gen.oneOf(address, new Address("andere Strasse", "anderer Ort"))
-	val persons = Gen.wrap(Gen.oneOf(createPeter, createPaul))
+	yield new Address(street, city)
 
+	
 	describe("Person") {
 		
 	    it("has no addresses in the beginning") {
@@ -42,8 +38,9 @@ class AdressverwaltungsProperties extends Spec with Checkers with ShouldMatchers
 	    }
 	    it("does not assign already known address") {
 	    	check(forAll(persons, addresses)((person, address) => 
-	    	(person knows address) ==>
+	    	// (person knows address) ==>
 	    	{
+	    		person assign address
 	    		val previousNumber = person.numberOfAddresses
 	    		person assign address
 	    		
