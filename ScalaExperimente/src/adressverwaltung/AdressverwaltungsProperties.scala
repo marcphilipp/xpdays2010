@@ -10,42 +10,53 @@ import org.scalatest.prop.Checkers
 
 @RunWith(classOf[JUnitRunner])
 class AdressverwaltungsProperties extends Spec with Checkers with ShouldMatchers {
-	
-	val persons = for(name <- Arbitrary.arbitrary[String]) yield new Person(name)
-	val addresses = for {
-		street <- Arbitrary.arbitrary[String] 
-		city <- Arbitrary.arbitrary[String]
-	}
-	yield new Address(street, city)
 
-	
-	describe("Person") {
-		
-	    it("has no addresses in the beginning") {
-	    	new Person("Klaus").numberOfAddresses should equal (0)
-	    }
-	    
-	    it("assigns unknown address") {
-	    	check(forAll(persons, addresses)((person, address) => 
-	    	!(person knows address) ==>
-	    	{
-	    		val previousNumber = person.numberOfAddresses
-	    		person.assign(address)
-	    		
-	    		(person knows address) &&
-	    		(person.numberOfAddresses == previousNumber + 1)
-	    	}))
-	    }
-	    it("does not assign already known address") {
-	    	check(forAll(persons, addresses)((person, address) => 
-	    	// (person knows address) ==>
-	    	{
-	    		person assign address
-	    		val previousNumber = person.numberOfAddresses
-	    		person assign address
-	    		
-	    		previousNumber == person.numberOfAddresses
-	    	}))
-	    }
-	}
+  implicit def addresses: Arbitrary[Address] = Arbitrary {
+    for {
+      street <- Arbitrary.arbitrary[String]
+      city <- Arbitrary.arbitrary[String]
+    } yield new Address(street, city)
+  }
+
+  implicit def persons: Arbitrary[Person] = Arbitrary {
+    for {
+      name <- Arbitrary.arbitrary[String]
+      addresses <- Gen.resize(3, Arbitrary.arbitrary[List[Address]])
+    } yield {
+      val person = new Person(name)
+      for (address <- addresses) {
+        person assign address
+      }
+      person
+    }
+  }
+
+  describe("Person") {
+
+    it("has no addresses in the beginning") {
+      new Person("Klaus").numberOfAddresses should equal(0)
+    }
+
+    it("assigns unknown address") {
+      check((person: Person, address: Address) =>
+        !(person knows address) ==> {
+          val previousNumber = person.numberOfAddresses
+          person.assign(address)
+
+          (person knows address) &&
+            (person.numberOfAddresses == previousNumber + 1)
+        })
+    }
+    it("does not assign already known address") {
+      check((person: Person, address: Address) =>
+        // (person knows address) ==>
+        {
+          person assign address
+          val previousNumber = person.numberOfAddresses
+          person assign address
+
+          previousNumber == person.numberOfAddresses
+        })
+    }
+  }
 }
