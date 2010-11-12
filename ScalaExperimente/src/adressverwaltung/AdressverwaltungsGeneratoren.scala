@@ -4,18 +4,18 @@ import org.scalacheck._
 import org.scalacheck.Arbitrary._
 import org.scalacheck.Gen._
 
-object AdressverwaltungsGeneratoren  {
-
+object AdressverwaltungsGeneratoren {
+  
   implicit def addresses: Arbitrary[Address] = Arbitrary {
     for {
-      street <- arbitrary[String]
-      city <- arbitrary[String]
+      street <- alphaStr
+      city <- alphaStr
     } yield new Address(street, city)
   }
 
   implicit def persons: Arbitrary[Person] = Arbitrary {
     for {
-      name <- arbitrary[String]
+      name <- alphaStr
       addresses <- resize(3, arbitrary[List[Address]])
     } yield {
       val person = new Person(name)
