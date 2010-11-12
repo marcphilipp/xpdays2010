@@ -7,16 +7,16 @@ import org.scalacheck._
 import org.scalacheck.Prop._
 import org.scalatest.Spec
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.prop.Checkers
 
 @RunWith(classOf[JUnitRunner])
-class AdressverwaltungsProperties extends Spec with Checkers with ShouldMatchers {
+class AdressverwaltungsProperties extends Spec with Checkers {
 
   describe("Person") {
 
     it("has no addresses in the beginning") {
-      new Person("Klaus").numberOfAddresses should equal(0)
+      check((person: Person, address: Address) =>
+        (person.numberOfAddresses == 0) ==> !(person knows address))
     }
 
     it("assigns unknown address") {
