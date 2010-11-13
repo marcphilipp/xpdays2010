@@ -39,7 +39,7 @@ class AdressverwaltungsProperties extends Spec with Checkers {
           person assign address
 
           previousNumber == person.numberOfAddresses
-        });
+        })
     }
   }
 }
