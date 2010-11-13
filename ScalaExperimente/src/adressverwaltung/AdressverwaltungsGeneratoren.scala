@@ -6,12 +6,12 @@ import org.scalacheck.Gen._
 
 object AdressverwaltungsGeneratoren {
 
-  val addressGen = for {
+  val addressGenerator = for {
     street <- alphaStr
     city <- alphaStr
   } yield new Address(street, city)
 
-  val allAddresses = listOfN(5, addressGen).sample.get
+  val allAddresses = listOfN(10, addressGenerator).sample.get
 
   implicit def arbitraryAddress = Arbitrary {
     oneOf(allAddresses)
@@ -20,7 +20,8 @@ object AdressverwaltungsGeneratoren {
   implicit def arbitraryPerson = Arbitrary {
     for {
       name <- alphaStr
-      addresses <- resize(2, arbitrary[List[Address]])
+      number <- frequency((3, 0), (3, 1), (2, 2), (1, 3), (1, 4), (1, 5), (1, 6))
+      addresses <- pick(number, allAddresses)
     } yield {
       val person = new Person(name)
       for (address <- addresses) {
@@ -29,5 +30,4 @@ object AdressverwaltungsGeneratoren {
       person
     }
   }
-
 }
