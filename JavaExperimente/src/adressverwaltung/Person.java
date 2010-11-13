@@ -30,4 +30,9 @@ public class Person {
 	public Collection<Address> displayAddresses() {
 		return Collections.unmodifiableSet(addresses);
 	}
+	
+	@Override
+	public String toString() {
+		return addresses.toString();
+	}
 }

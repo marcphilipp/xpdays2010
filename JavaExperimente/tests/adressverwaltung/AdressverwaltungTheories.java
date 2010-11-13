@@ -1,5 +1,7 @@
 package adressverwaltung;
 
+import static adressverwaltung.AdditionalAssumes.assumeEquals;
+import static adressverwaltung.AdditionalAssumes.assumeFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -51,7 +53,7 @@ public class AdressverwaltungTheories {
 
 	@Theory(nullsAccepted = false)
 	public void assignNewAddressToPerson(Person person, Address address) {
-		AdditionalAssumes.assumeFalse(person.knows(address));
+		assumeFalse(person.knows(address));
 		int numberOfKnownAddresses = person.numberOfAddresses();
 
 		person.assign(address);
@@ -83,7 +85,7 @@ public class AdressverwaltungTheories {
 
 	@Theory
 	public void deleteUnknownAddressFromPerson(Person person, Address address) {
-		AdditionalAssumes.assumeFalse(person.knows(address));
+		assumeFalse(person.knows(address));
 		int numberOfKnownAddresses = person.numberOfAddresses();
 
 		person.remove(address);
@@ -105,7 +107,7 @@ public class AdressverwaltungTheories {
 
 	@Theory
 	public void displayNoAddressFromPersonWithoutAddress(Person person) {
-		AdditionalAssumes.assumeEquals(0, person.numberOfAddresses());
+		assumeEquals(0, person.numberOfAddresses());
 
 		Collection<Address> addresses = person.displayAddresses();
 
