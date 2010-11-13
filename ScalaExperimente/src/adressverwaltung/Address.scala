@@ -1,15 +1,15 @@
 package adressverwaltung
 
-class Address(val strasse: String, val ort: String) {
+class Address(val street: String, val city: String) {
 
-  def contains(part: String) = strasse.contains(part) || ort.contains(part)
+  def contains(part: String) = street.contains(part) || city.contains(part)
 
   override def equals(other: Any) = other match {
-    case that: Address => this.strasse == that.strasse && this.ort == that.ort
+    case that: Address => this.street == that.street && this.city == that.city
     case _ => false
   }
 
-  override def toString = strasse + ", " + ort
+  override def toString = street + ", " + city
 
-  override def hashCode = strasse.hashCode + ort.hashCode
+  override def hashCode = street.hashCode + city.hashCode
 }
