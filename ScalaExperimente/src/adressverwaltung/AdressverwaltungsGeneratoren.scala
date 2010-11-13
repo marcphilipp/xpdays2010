@@ -5,12 +5,16 @@ import org.scalacheck.Arbitrary._
 import org.scalacheck.Gen._
 
 object AdressverwaltungsGeneratoren {
-  
+
+  val addressGen = for {
+    street <- alphaStr
+    city <- alphaStr
+  } yield new Address(street, city)
+
+  val allAddresses = listOfN(5, addressGen).sample.get
+
   implicit def addresses: Arbitrary[Address] = Arbitrary {
-    for {
-      street <- alphaStr
-      city <- alphaStr
-    } yield new Address(street, city)
+    oneOf(allAddresses)
   }
 
   implicit def persons: Arbitrary[Person] = Arbitrary {
@@ -25,4 +29,5 @@ object AdressverwaltungsGeneratoren {
       person
     }
   }
+
 }

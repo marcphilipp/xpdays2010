@@ -5,6 +5,7 @@ import AdressverwaltungsGeneratoren._
 import org.junit.runner.RunWith
 import org.scalacheck._
 import org.scalacheck.Prop._
+import org.scalacheck.Test._
 import org.scalatest.Spec
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.prop.Checkers
@@ -32,14 +33,13 @@ class AdressverwaltungsProperties extends Spec with Checkers {
 
     it("does not assign already known address") {
       check((person: Person, address: Address) =>
-        // (person knows address) ==>
-        {
+        (person knows address) ==> {
           person assign address
           val previousNumber = person.numberOfAddresses
           person assign address
 
           previousNumber == person.numberOfAddresses
-        })
+        });
     }
   }
 }
