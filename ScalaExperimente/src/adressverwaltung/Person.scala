@@ -20,5 +20,5 @@ class Person(name: String) {
   def findAddressContaining(part: String) =
     addresses filter (address => address contains part)
 
-  override def toString = name
+  override def toString = name + addresses
 }

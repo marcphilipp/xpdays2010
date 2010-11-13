@@ -34,10 +34,9 @@ class AdressverwaltungsProperties extends Spec with Checkers {
     it("does not assign already known address") {
       check((person: Person, address: Address) =>
         (person knows address) ==> {
-          person assign address
           val previousNumber = person.numberOfAddresses
-          person assign address
 
+          person assign address
           previousNumber == person.numberOfAddresses
         })
     }

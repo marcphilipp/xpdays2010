@@ -13,14 +13,14 @@ object AdressverwaltungsGeneratoren {
 
   val allAddresses = listOfN(5, addressGen).sample.get
 
-  implicit def addresses: Arbitrary[Address] = Arbitrary {
+  implicit def arbitraryAddress = Arbitrary {
     oneOf(allAddresses)
   }
 
-  implicit def persons: Arbitrary[Person] = Arbitrary {
+  implicit def arbitraryPerson = Arbitrary {
     for {
       name <- alphaStr
-      addresses <- resize(3, arbitrary[List[Address]])
+      addresses <- resize(2, arbitrary[List[Address]])
     } yield {
       val person = new Person(name)
       for (address <- addresses) {
