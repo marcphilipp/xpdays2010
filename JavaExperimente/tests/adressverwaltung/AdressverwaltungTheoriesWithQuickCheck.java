@@ -1,6 +1,6 @@
 package adressverwaltung;
 
-import static adressverwaltung.AdditionalAssumes.assumeFalse;
+import static util.AdditionalAssumes.assumeFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;

@@ -1,4 +1,4 @@
-package adressverwaltung;
+package util;
 
 import org.junit.Assume;
 
