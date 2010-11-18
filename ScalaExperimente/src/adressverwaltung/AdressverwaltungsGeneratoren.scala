@@ -7,8 +7,8 @@ import org.scalacheck.Gen._
 object AdressverwaltungsGeneratoren {
 
   val addressGenerator = for {
-    street <- alphaStr
-    city <- alphaStr
+    street <- arbitrary[String]
+    city <- arbitrary[String]
   } yield new Address(street, city)
 
   val allAddresses = listOfN(10, addressGenerator).sample.get
@@ -19,7 +19,7 @@ object AdressverwaltungsGeneratoren {
 
   implicit def arbitraryPerson = Arbitrary {
     for {
-      name <- alphaStr
+      name <- arbitrary[String]
       number <- frequency((3, 0), (3, 1), (2, 2), (1, 3), (1, 4), (1, 5), (1, 6))
       addresses <- pick(number, allAddresses)
     } yield {
