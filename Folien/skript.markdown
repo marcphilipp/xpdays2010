@@ -41,7 +41,8 @@ Unit Test entspricht Wertetabelle
   <tr><td>12</td><td>4</td></tr>
 </table>
 
-> Traditional test suites verify a few well-picked scenarios or example inputs. -> does not uncover errors in legal inputs the test writer overlooked. [1]
+> Traditional test suites verify a few well-picked scenarios or example inputs.  
+> → does not uncover errors in legal inputs the test writer overlooked. [1]
 
 ### Mathematische Spezifikation
 
@@ -70,7 +71,8 @@ Wie kommen die Werte rein?
 
 Trennung von zu Wertdefinition und Spezifikation der Eigenschaft
 
-Die gleichen Werte wie im Unit Test! Es ist zwar leichter, neue Werte hinzuzufügen, aber man muss sich die Werte immer noch selbst ausdenken → Nix gewonnen!
+Die gleichen Werte wie im Unit Test! Es ist zwar leichter, neue Werte hinzuzufügen, aber man muss sich die Werte immer noch selbst ausdenken  
+→ Nix gewonnen!
 
 Kann man nicht automatisch "zufällige" Eingabewerte generieren?
 
@@ -83,11 +85,8 @@ Kann man nicht automatisch "zufällige" Eingabewerte generieren?
 	* max. 500 erfolglose Versuche
 * Test fehlschlagen lassen
 
-----------------
-
 Fertig, oder?
 
-----------------
 
 ## Objekte
 
@@ -99,7 +98,7 @@ Fertig, oder?
 
 ### Umformung des Unit Tests in eine Theory
 
-Live oder mit versch. Dateien?
+TODO Live oder mit versch. Dateien?
 
 * Man merkt: Es fehlt ein assume → Test wird rot
 * Implementierung korrigieren
@@ -124,16 +123,12 @@ Aber: Daten werden immer noch per Hand definiert.
 
 ## Fazit
 
-Kein Entweder-oder!
+TODO Kein Entweder-oder!
 
 > An example can quickly lead a reader to an intuitive grasp of the desired functionality, but a theory helps make clear which aspects of the example are necessary, and which are arbitrary. [1]
 
 
-
-
-----------------
-
-# Was fehlt?
+## TODO Was fehlt?
 
 * Was muss man bei der Verwendung von generierten Eingabewerten beachten?
 	* Beispiel: Teste ich nicht nur triviale Fälle?
@@ -142,7 +137,6 @@ Kein Entweder-oder!
 * Was macht eine gute Spezifikation aus?
 * Wie geht das beides zusammen?
 
-----------------
 
 ## Quellen
 
