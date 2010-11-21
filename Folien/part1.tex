@@ -1,0 +1,138 @@
+\begin{frame}{Eine einfache Funktion}
+% \begin{lstlisting}
+% public class Calculator {   
+%    public double f ( double d ) {
+%       if( d < 5.0 ) return 3.0;
+%       else if( d < 10.0 ) return 2.0;
+%       else return 4.0;
+%    }
+% }
+% \end{lstlisting}
+
+\begin{minipage}[t]{5cm}
+Beispielwerte für f:
+
+\begin{tabular}{|c|c|}
+\textbf{x} & \textbf{f( x )}  \\ \hline
+1 & 3  \\
+3 & 3  \\
+7 & 2  \\
+12 & 4
+\end{tabular} 
+\end{minipage}
+\begin{minipage}[t]{5cm}
+Unit-Tests für  f:
+
+\begin{lstlisting}
+@Test
+public void valuesOfF() {
+
+assertEquals( 3.0, f( 1.0 ), 0.01 );
+assertEquals( 3.0, f( 3.0 ), 0.01 );
+assertEquals( 2.0, f( 7.0 ), 0.01 );
+assertEquals( 4.0, f( 12.0 ), 0.01 );
+}
+\end{lstlisting}
+\end{minipage}
+\end{frame}
+
+\begin{frame}{Was ist das Problem?}
+
+\glqq{}Traditional test suites verify a few well-picked scenarios or example inputs. However, such example-based testing does not uncover errors in legal inputs that the test writer overlooked.\grqq{}
+
+\hfill[Saff et.al.]
+
+\end{frame}
+
+\begin{frame}{Eine Alternative: Spezifikationen}
+Eine geeignete mathematische Spezifikation ist z. B.:
+\begin{eqnarray*}
+\forall x. \; \parbox{2cm}{$(x < 5$} &\Rightarrow& f(x) = 3) \\
+\land \; \parbox{2cm}{$(5 \leq x < 10$} &\Rightarrow& f(x) = 2)\\
+\land \; \parbox{2cm}{$(10 \leq x$} &\Rightarrow& f(x) = 4)
+\end{eqnarray*}
+
+Kann man so etwas als Unit-Test formulieren?
+\end{frame}
+
+\begin{frame}{Eine Lösung: JUnit Theories}
+
+\glqq{}A theory generalizes a (possibly infinite) set of example-based tests. A theory is an assertion that should be true for any data, and it can be exercised by human-chosen data or by automatic data generation.\grqq
+
+\hfill[Saff et.al.]
+
+\end{frame}
+
+\begin{frame}{Theories}
+	\begin{itemize}
+		\item Neu seit JUnit Version 4.4
+		\item Parametrisierte Testmethode mit Vorbedingungen (Assumptions)
+			\begin{itemize}
+				\item \texttt{assumeThat()}
+				\item \texttt{assumeTrue()}
+				\item \texttt{assumeNotNull()}
+			\end{itemize}
+		\item \texttt{@Theory} statt \texttt{@Test}
+		\item Input für Testmethoden über \texttt{@DataPoint}(\texttt{s})-Annotation
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Herkömmliche Tests vs. Theories}
+	\begin{itemize}
+		\item Herkömmliche Tests benutzen Beispiele:
+			\begin{itemize}
+				\item Überprüfung des Verhaltens unter ausgewählten Eingaben
+				\item Es sollten charakteristische Beispiele gewählt werden
+			\end{itemize}
+		\item Eine Theory verallgemeinert eine Menge von Tests:
+			\begin{itemize}
+				\item Vorbedingung wird explizit angegeben
+				\item Sollte für alle Eingaben gelten, die die Vorbedingungen erfüllen
+			\end{itemize}
+		\item Eingabewerte können explizit angegeben werden oder automatisch erzeugt werden
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Theories für unsere Funktion}
+% \begin{lstlisting}
+% @Theory
+% public void valuesLessThan5( double d ) {
+%    assume( d < 5.0 );
+%    assertEquals( 3.0, f(d), 0.01 );
+% }
+
+% @Theory
+% public void valuesLessThan10( double d ) {
+%    assume ( 5.0 <= d ); 
+%    assume( d < 10.0 );
+%    assertEquals( 2.0, f(d), 0.01 );
+% }
+
+% @Theory
+% public void values10OrGreater( double d ) {
+%    assume( 10.0 <= d );
+%    assertEquals( 4.0, f(d), 0.01 );
+% }
+% \end{lstlisting}
+
+Und woher kommen die Testwerte?
+
+\begin{lstlisting}
+@DataPoint
+public static double VALUE1 = 1.0;
+
+@DataPoint
+public static double VALUE2 = 3.0;
+
+@DataPoint
+public static double VALUE3 = 7.0;
+
+@DataPoint
+public static double VALUE4 = 12.0;
+\end{lstlisting}
+
+\end{frame}
+
+
+
