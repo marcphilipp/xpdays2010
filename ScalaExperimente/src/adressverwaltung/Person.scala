@@ -1,8 +1,14 @@
 package adressverwaltung
 
-import scala.collection.immutable._
 
 class Person(name: String) {
+	
+	def this(name:String, addresses:Seq[Address]){
+	  this(name)
+	  for (address <- addresses) {
+        this assign address
+      }
+	}
 
   private var addresses: List[Address] = Nil
 
