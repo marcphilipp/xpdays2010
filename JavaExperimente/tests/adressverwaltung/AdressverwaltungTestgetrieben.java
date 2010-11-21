@@ -10,20 +10,20 @@ public class AdressverwaltungTestgetrieben {
 
 	@Test
 	public void newPersonHasNoAddresses() {
-		assertEquals(0, new Person().numberOfAddresses());
+		assertEquals(0, new Person("Bob").numberOfAddresses());
 	}
 
 	@Test
 	public void personWithoutAddressesDoesNotKnowAnyAddresses() {
-		Person person = new Person();
-		Address unknown = new Address();
+		Person person = new Person("Bob");
+		Address unknown = new Address("Holstenwall 12", "20355 Hamburg");
 		assertFalse(person.knows(unknown));
 	}
 
 	@Test
 	public void assignAddressToPerson() {
-		Person person = new Person();
-		Address address = new Address();
+		Person person = new Person("Bob");
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 		
 		person.assign(address);
 
@@ -33,7 +33,7 @@ public class AdressverwaltungTestgetrieben {
 
 	@Test
 	public void assigningNullAddressHasNoEffect() {
-		Person person = new Person();
+		Person person = new Person("Bob");
 
 		person.assign(null);
 
@@ -43,9 +43,9 @@ public class AdressverwaltungTestgetrieben {
 
 	@Test
 	public void addressIsOnlyAddedOnce() {
-		Person person = new Person();
+		Person person = new Person("Bob");
 
-		Address address = new Address();
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 		person.assign(address);
 		person.assign(address);
 
@@ -56,9 +56,9 @@ public class AdressverwaltungTestgetrieben {
 
 	@Test
 	public void assignSeveralAddressesToPerson() {
-		Person person = new Person();
-		person.assign(new Address());
-		person.assign(new Address());
+		Person person = new Person("Bob");
+		person.assign(new Address("Holstenwall 12", "20355 Hamburg"));
+		person.assign(new Address("Holstenwall 12", "20355 Hamburg"));
 		assertEquals(2, person.numberOfAddresses());
 	}
 

@@ -1,8 +1,9 @@
 package adressverwaltung;
 
-import static util.AdditionalAssumes.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
+import static util.AdditionalAssumes.assumeFalse;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
@@ -15,11 +16,11 @@ public class AdressverwaltungTakeThree {
 
 	@Test
 	public void assignAddressToPerson_1() {
-		Person person = new Person();
-		Address address = new Address();
+		Person person = new Person("Bob");
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 
 		person.assign(address);
-		
+
 		assertTrue(person.knows(address));
 		assertEquals(1, person.numberOfAddresses());
 	}
@@ -28,8 +29,8 @@ public class AdressverwaltungTakeThree {
 
 	@Test
 	public void assignAddressToPerson_2() {
-		Person person = new Person();
-		Address address = new Address();
+		Person person = new Person("Bob");
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 
 		assignAddressToPersonTmp_2(person, address);
 	}
@@ -45,15 +46,15 @@ public class AdressverwaltungTakeThree {
 
 	@Test
 	public void assignAddressToPerson_3() {
-		Person person = new Person();
-		Address address = new Address();
+		Person person = new Person("Bob");
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 
 		assignAddressToPersonTmp_3(person, address);
 	}
 
 	private void assignAddressToPersonTmp_3(Person person, Address address) {
 		int previousNumber = person.numberOfAddresses();
-		
+
 		person.assign(address);
 
 		assertTrue(person.knows(address));
@@ -63,38 +64,39 @@ public class AdressverwaltungTakeThree {
 	// /////////////
 
 	@DataPoint
-	public static Address address1 = new Address();
+	public static Address address = new Address("Holstenwall 12",
+			"20355 Hamburg");
 
 	@DataPoint
 	public static Person personWithoutAddresses() {
-		return new Person();
+		return new Person("Bob");
 	}
 
 	@DataPoint
 	public static Person personWithAnAddress() {
-		Person person = new Person();
-		person.assign(address1);
+		Person person = new Person("Bob");
+		person.assign(address);
 		return person;
 	}
 
 	@Theory
 	public void assignAddressToPersonTheory_1(Person person, Address address) {
 		int previousNumber = person.numberOfAddresses();
-		
+
 		person.assign(address);
 
 		assertTrue(person.knows(address));
 		assertEquals(previousNumber + 1, person.numberOfAddresses());
 	}
-	
-	////////////////
+
+	// //////////////
 
 	@Theory
 	public void assignUnknownAddressToPerson(Person person, Address address) {
 		assumeFalse(person.knows(address));
-		
+
 		int previousNumber = person.numberOfAddresses();
-		
+
 		person.assign(address);
 
 		assertTrue(person.knows(address));
@@ -104,9 +106,9 @@ public class AdressverwaltungTakeThree {
 	@Theory
 	public void assignAlreadyKnownAddressToPerson(Person person, Address address) {
 		assumeTrue(person.knows(address));
-		
+
 		int previousNumber = person.numberOfAddresses();
-		
+
 		person.assign(address);
 
 		assertTrue(person.knows(address));

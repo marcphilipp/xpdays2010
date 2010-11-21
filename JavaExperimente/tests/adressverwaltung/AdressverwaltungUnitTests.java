@@ -9,27 +9,28 @@ import org.junit.Test;
 public class AdressverwaltungUnitTests {
 
 	private Person personWithTwoAddresses() {
-		Person personWithTwoAddresses = new Person();
-		personWithTwoAddresses.assign(new Address());
-		personWithTwoAddresses.assign(new Address());
+		Person personWithTwoAddresses = new Person("Bob");
+		personWithTwoAddresses.assign(new Address("Holstenwall 12", "20355 Hamburg"));
+		personWithTwoAddresses.assign(new Address("Holstenwall 12", "20355 Hamburg"));
 		return personWithTwoAddresses;
 	}
 
 	private Person personWithoutAddresses() {
-		return new Person();
+		return new Person("Bob");
 	}
 
 	@Test
 	public void personWithoutAddressesDoesNotKnowAnyAddresses() {
+		assertEquals("string exp", "string act");
 		Person person = personWithoutAddresses();
-		Address unknown = new Address();
+		Address unknown = new Address("Holstenwall 12", "20355 Hamburg");
 		assertFalse(person.knows(unknown));
 	}
 
 	@Test
 	public void assignNewAddressToPersonWithoutAddresses() {
 		Person person = personWithoutAddresses();
-		Address address = new Address();
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 
 		person.assign(address);
 
@@ -39,9 +40,9 @@ public class AdressverwaltungUnitTests {
 
 	@Test
 	public void personWithAddressOnlyKnowsItsAddress() {
-		Person person = new Person();
-		Address known = new Address();
-		Address unknown = new Address();
+		Person person = new Person("Bob");
+		Address known = new Address("Holstenwall 12", "20355 Hamburg");
+		Address unknown = new Address("Holstenwall 12", "20355 Hamburg");
 
 		person.assign(known);
 
@@ -58,7 +59,7 @@ public class AdressverwaltungUnitTests {
 	@Test
 	public void assignNewAddressToPersonWithAddresses() {
 		Person person = personWithTwoAddresses();
-		Address address = new Address();
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 
 		person.assign(address);
 
@@ -69,7 +70,7 @@ public class AdressverwaltungUnitTests {
 	@Test
 	public void assignAlreadyKnownAddressToPersonWithOneAddress() {
 		Person person = personWithoutAddresses();
-		Address address = new Address();
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 		person.assign(address);
 		assertTrue(person.knows(address));
 
@@ -82,7 +83,7 @@ public class AdressverwaltungUnitTests {
 	@Test
 	public void assignAlreadyKnownAddressToPersonWithSeveralAddresses() {
 		Person person = personWithTwoAddresses();
-		Address address = new Address();
+		Address address = new Address("Holstenwall 12", "20355 Hamburg");
 		person.assign(address);
 		assertTrue(person.knows(address));
 

@@ -19,14 +19,14 @@ public class AdressverwaltungTheories {
 
 	@DataPoint
 	public static Person personWithOneAddress() {
-		Person person = new Person();
+		Person person = new Person("Bob");
 		person.assign(address1);
 		return person;
 	}
 
 	@DataPoint
 	public static Person personWithAllAddresses() {
-		Person person = new Person();
+		Person person = new Person("Bob");
 		person.assign(address1);
 		person.assign(address2);
 		person.assign(address3);
@@ -36,14 +36,14 @@ public class AdressverwaltungTheories {
 
 	@DataPoint
 	public static Person personWithoutAddress() {
-		return new Person();
+		return new Person("Bob");
 	}
 
 	@DataPoint
-	public static Address address1 = new Address();
+	public static Address address1 = new Address("Holstenwall 12", "20355 Hamburg");
 
 	@DataPoint
-	public static Address address2 = new Address();
+	public static Address address2 = new Address("Holstenwall 12", "20355 Hamburg");
 
 	@DataPoint
 	public static Address address3 = null;

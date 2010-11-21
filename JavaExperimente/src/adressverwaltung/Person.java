@@ -8,6 +8,15 @@ import java.util.Set;
 public class Person {
 
 	private final Set<Address> addresses = new HashSet<Address>();
+	private final String name;
+
+	public Person(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
 
 	public boolean knows(Address address) {
 		return addresses.contains(address);
@@ -30,7 +39,7 @@ public class Person {
 	public Collection<Address> displayAddresses() {
 		return Collections.unmodifiableSet(addresses);
 	}
-	
+
 	@Override
 	public String toString() {
 		return addresses.toString();
