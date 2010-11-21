@@ -1,5 +1,9 @@
 \documentclass[utf8]{beamer}
-%\usetheme{andrena}
+\usecolortheme{seagull}
+\usecolortheme{andrena}
+\useinnertheme{andrena}
+\useoutertheme{split}
+\setbeamertemplate{navigation symbols}{}
 \setbeamercovered{dynamic}
 
 \AtBeginPart{\frame{\partpage}}
@@ -22,7 +26,7 @@
 \definecolor[named]{keywords}{HTML}{005D35}
 \definecolor[named]{comments}{HTML}{808080}
 \definecolor[named]{identifiers}{HTML}{FF0000}
-\definecolor[named]{blockbackground}{HTML}{F1EEE9}
+\colorlet{blockbackground}{black!10}
 \setbeamercolor{blockbackground}{bg=blockbackground}
 \definecolor[named]{strings}{HTML}{0000FF}
 \usepackage[final]{listings}
@@ -50,7 +54,7 @@
 
 \begin{document}
 {
-%	\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{background-title.png}}
+	\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{background-title.png}}
 	\begin{frame}[t,plain]
 		\titlepage
 	\end{frame}
