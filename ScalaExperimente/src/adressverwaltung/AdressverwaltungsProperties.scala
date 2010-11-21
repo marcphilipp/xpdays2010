@@ -15,11 +15,6 @@ class AdressverwaltungsProperties extends Spec with Checkers {
 
   describe("Person") {
 
-    it("has no addresses in the beginning") {
-      check((person: Person, address: Address) =>
-        (person.numberOfAddresses == 0) ==> !(person knows address))
-    }
-
     it("assigns unknown address") {
       check((person: Person, address: Address) =>
         !(person knows address) ==> {

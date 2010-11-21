@@ -1,7 +1,7 @@
 package adressverwaltung
 
 class Address(val street: String, val city: String) {
-
+	
   def contains(part: String) = street.contains(part) || city.contains(part)
 
   override def equals(other: Any) = other match {
