@@ -1,17 +1,20 @@
-\begin{frame}[fragile]{Eine einfache Funktion}
-% \begin{lstlisting}
-% public class Calculator {   
-%    public double f ( double d ) {
-%       if( d < 5.0 ) return 3.0;
-%       else if( d < 10.0 ) return 2.0;
-%       else return 4.0;
-%    }
-% }
-% \end{lstlisting}
+\begin{frame}[fragile]{Eine einfache Funktion} % Version 1
+\begin{lstlisting}
+public class Calculator {   
+   public double f ( double x ) {
+      if( x < 5.0 ) return 3.0;
+      else if( x < 10.0 ) return 2.0;
+      else return 4.0;
+   }
+}
+\end{lstlisting}
 
-\begin{minipage}[t]{5cm}
+\begin{minipage}[t]{3.5cm}
+\only<2->{
+~ \\
 Beispielwerte für f:
 
+~ \\
 \begin{tabular}{|c|c|}
 \textbf{x} & \textbf{f( x )}  \\ \hline
 1 & 3  \\
@@ -19,21 +22,58 @@ Beispielwerte für f:
 7 & 2  \\
 12 & 4
 \end{tabular} 
-\end{minipage}
-\begin{minipage}[t]{5cm}
+}
+\end{minipage} 
+\hfill
+\begin{minipage}[t]{7cm}
 Unit-Tests für  f:
 
 \begin{lstlisting}
-@Test
-public void valuesOfF() {
-
-assertEquals( 3.0, f( 1.0 ), 0.01 );
-assertEquals( 3.0, f( 3.0 ), 0.01 );
-assertEquals( 2.0, f( 7.0 ), 0.01 );
-assertEquals( 4.0, f( 12.0 ), 0.01 );
+@Test public void valuesOfF() {
+  assertEquals( 3.0, f( 1.0 ), 0.01 );
+  assertEquals( 3.0, f( 3.0 ), 0.01 );
+  assertEquals( 2.0, f( 7.0 ), 0.01 );
+  assertEquals( 4.0, f( 12.0 ), 0.01 );
 }
 \end{lstlisting}
 \end{minipage}
+
+\end{frame}
+
+\begin{frame}[fragile]{Eine einfache Funktion} % Version 2
+\begin{lstlisting}
+public class Calculator {   
+   public double f ( double x ) {
+      if( x < 5.0 ) return 3.0;
+      else if( x < 10.0 ) return 2.0;
+      else return 4.0;
+   }
+}
+\end{lstlisting}
+
+\begin{minipage}[t]{3.5cm}
+~ \\
+Beispielwerte für f:
+
+~ \\
+\begin{tabular}{|c|c|}
+\textbf{x} & \textbf{f( x )}  \\ \hline
+1 & 3  \\
+3 & 3  \\
+7 & 2  \\
+12 & 4
+\end{tabular} 
+\end{minipage} 
+\hfill
+\begin{minipage}[t]{4.5cm}
+~ \\
+\vspace{-1em}\\
+\only<1>{\includegraphics[height=4.5cm]{0Funktionen.jpg}}
+\only<2>{\includegraphics[height=4.5cm]{1Funktion.jpg}}
+\only<3>{\includegraphics[height=4.5cm]{2Funktionen.jpg}}
+\only<4>{\includegraphics[height=4.5cm]{3Funktionen.jpg}}
+\end{minipage}
+
 \end{frame}
 
 \begin{frame}{Was ist das Problem?}
@@ -55,15 +95,35 @@ Eine geeignete mathematische Spezifikation ist z. B.:
 Kann man so etwas als Unit-Test formulieren?
 \end{frame}
 
+% \begin{frame}
+
+% \glqq{}A theory generalizes a (possibly infinite) set of example-based
+% tests. A theory is an assertion that should be true for any data, and
+% it can be exercised by human-chosen data or by automatic data
+% generation.\grqq
+
+% \hfill[Saff et.al.]
+
+% \end{frame}
+
 \begin{frame}{Eine Lösung: JUnit Theories}
-
-\glqq{}A theory generalizes a (possibly infinite) set of example-based tests. A theory is an assertion that should be true for any data, and it can be exercised by human-chosen data or by automatic data generation.\grqq
-
-\hfill[Saff et.al.]
-
+	\begin{itemize}
+		\item Herkömmliche Tests benutzen Beispiele:
+			\begin{itemize}
+				\item Überprüfung des Verhaltens unter ausgewählten Eingaben
+				\item Entwickler ist dafür verantwortlich, charakteristische Beispiele zu wählen
+			\end{itemize}
+		\item Eine Theory verallgemeinert eine Menge von Tests:
+			\begin{itemize}
+				\item Vorbedingung wird explizit angegeben
+				\item Assertion muss für alle Eingaben gelten, die die Vorbedingungen erfüllen
+			\end{itemize}
+		\item Eingabewerte müssen explizit angegeben werden
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Theories}
+
+\begin{frame}{Theories -- Wie sehen sie genau aus?}
 	\begin{itemize}
 		\item Neu seit JUnit Version 4.4
 		\item Parametrisierte Testmethode mit Vorbedingungen (Assumptions)
@@ -77,47 +137,31 @@ Kann man so etwas als Unit-Test formulieren?
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Herkömmliche Tests vs. Theories}
-	\begin{itemize}
-		\item Herkömmliche Tests benutzen Beispiele:
-			\begin{itemize}
-				\item Überprüfung des Verhaltens unter ausgewählten Eingaben
-				\item Es sollten charakteristische Beispiele gewählt werden
-			\end{itemize}
-		\item Eine Theory verallgemeinert eine Menge von Tests:
-			\begin{itemize}
-				\item Vorbedingung wird explizit angegeben
-				\item Sollte für alle Eingaben gelten, die die Vorbedingungen erfüllen
-			\end{itemize}
-		\item Eingabewerte können explizit angegeben werden oder automatisch erzeugt werden
-	\end{itemize}
-\end{frame}
-
 
 \begin{frame}[fragile]{Theories für unsere Funktion}
-% \begin{lstlisting}
-% @Theory
-% public void valuesLessThan5( double d ) {
-%    assume( d < 5.0 );
-%    assertEquals( 3.0, f(d), 0.01 );
-% }
+\begin{lstlisting}
+@Theory
+public void valuesLessThan5( double x ) {
+   assumeTrue( x < 5.0 );
+   assertEquals( 3.0, f(x), 0.01 );
+}
 
-% @Theory
-% public void valuesLessThan10( double d ) {
-%    assume ( 5.0 <= d ); 
-%    assume( d < 10.0 );
-%    assertEquals( 2.0, f(d), 0.01 );
-% }
+@Theory
+public void valuesBetween5And10( double x ) {
+   assumeTrue( 5.0 <= x ); 
+   assumeTrue( x < 10.0 );
+   assertEquals( 2.0, f(x), 0.01 );
+}
 
-% @Theory
-% public void values10OrGreater( double d ) {
-%    assume( 10.0 <= d );
-%    assertEquals( 4.0, f(d), 0.01 );
-% }
-% \end{lstlisting}
+@Theory
+public void values10OrGreater( double x ) {
+   assumeTrue( 10.0 <= x );
+   assertEquals( 4.0, f(x), 0.01 );
+}
+\end{lstlisting}
+\end{frame}
 
-Und woher kommen die Testwerte?
-
+\begin{frame}[fragile]{Woher kommen die Testwerte?}
 \begin{lstlisting}
 @DataPoint
 public static double VALUE1 = 1.0;
@@ -131,8 +175,10 @@ public static double VALUE3 = 7.0;
 @DataPoint
 public static double VALUE4 = 12.0;
 \end{lstlisting}
-
 \end{frame}
 
-
-
+\begin{frame}{}
+\begin{center}
+DEMO
+\end{center}
+\end{frame}
