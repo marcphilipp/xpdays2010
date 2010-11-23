@@ -19,6 +19,7 @@ class AdressverwaltungsProperties extends Spec with Checkers {
       check((person: Person, address: Address) =>
         !(person knows address) ==> {
           val previousNumber = person.numberOfAddresses
+          
           person assign address
 
           (person knows address) &&
@@ -32,6 +33,7 @@ class AdressverwaltungsProperties extends Spec with Checkers {
           val previousNumber = person.numberOfAddresses
 
           person assign address
+          
           previousNumber == person.numberOfAddresses
         })
     }
