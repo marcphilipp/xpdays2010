@@ -1,0 +1,137 @@
+N: "So, das war's"
+
+M: zeigt "Oder?"
+
+N: "Oder? Was meinst Du denn damit?"
+
+M: "Das war ein schönes Beispiel, aber was mach ich im echten Leben? Da hab ich Objekte!" blättert um
+
+N: "Objekte? Hast Du dafür ein Beispiel?"
+
+M: "Wir entwickeln gerade eine Adressverwaltung, die können wir als Beispiel nehmen. Da hab ich eine User Story" zeigt Folie, liest vor
+
+N: "Habt Ihr dafür schon was entwickelt, und auch Tests?"
+
+M: wechselt in IDE, "Ich hab hier einen Test, der diese Story überprüft." erklärt Code
+
+N: "Naja, das ist jetzt ja wieder so ein beispielhafter Unit-Test wie wir sie vorhin gesehen haben, für eine Person und eine Adresse. Können wir daraus denn auch eine Spezifikation machen?"
+
+M: "Ich denke schon, denn dieser Teil ist ja allgemeingültig und nicht abhängig von der speziellen Person oder Adresse"
+extract method des unteren Teils
+Test laufenlassen
+
+M: "Jetzt können wir die neue Methode zu einer Theory machen"
+public und Theory
+"und die beiden Objekte können wir zu Datapoints umformen"
+Datapoint und Runner
+
+N: "Das ist ja jetzt nichts anderes als vorher. Können wir jetzt auch mehrere Adressen haben?"
+DataPoint  und zweite Adresse karlsruhe
+Test laufenlassen
+Filter einschalten, expected 1 but was 2
+
+N: "Ah, ich glaube ich weiß, woran das liegt. Lass uns mal gucken."
+Umschalten auf PDF
+
+N: "Guck mal, beim ersten Testdurchlauf wird der Person die erste Adresse zugefügt. Und beim zweiten Testdurchlauf wird derselben Person noch eine Adresse zugefügt. Aber sie hat ja schon eine aus dem ersten Testlauf, deswegen geht der Test schief.
+Wir müssen für jeden Test eine neue Person erzeugen."
+
+M: "Ok, dann machen wir eine Methode, die jedesmal eine neue Person erzeugt."
+Testlauf: grün
+
+M: "Aber eigentlich war es ja richtig, dass der Test fehlgeschlagen ist, wenn eine Person genommen wird, die schon eine Adresse hat."
+
+N: "OK, lass uns das mal überprüfen. Mach doch mal einen zweiten Datapoint für eine Person, die schon eine Adresse hat."
+Testlauf: rot
+
+M: "Ja, guck mal hier, alice hat schon eine Adresse, und wenn sie noch eine bekommt, schlägt der Test fehl."
+
+N: "OK, dann müssen wir uns vorher merken, wie viele Adressen die Person hat, und hinterher hat sie dann eben eine mehr."
+previousNumber
+
+M: "Hm, der Test ist immer noch rot. Diesmal erwarten wir 2 Adressen, aber es gibt nur eine. Schau mal, das liegt daran, dass Alice Hamburg bekommt, aber sie hat Hamburg schon als Adresse."
+
+N: "Stimmt, das stand ja auch in Deiner User Story: Die Person soll jede Adresse nur einmal haben.
+OK, dann müssen wir eben vorher prüfen, ob die Person die Adresse schon hat."
+
+M: "Dann bauen wir ein Assume in den Test ein."
+Testlauf: grün
+
+N: "Ja, aber was ist, wenn die Person die Adresse schon kennt? Dafür brauchen wir doch auch einen Test!"
+
+M: "Wenn die Person die Adresse schon kennt, hat sie danach natürlich genauso viele Adressen wie vorher."
+Testlauf: grün
+
+N: "Damit haben wir ja schon viel gewonnen, weil wir vorher einige wichtige Testfälle übersehen hatten."
+
+PAUSE -- Trinken
+
+M: "Aber wir müssen die Testdaten immer noch per Hand angeben und können noch viele Fälle vergessen."
+
+N: "Sag mal, wir haben doch eben das ScalaCheck gesehen. Hilft uns das in diesem Fall vielleicht auch weiter?"
+
+M: "Guck mal hier, so sieht das aus, wenn man diese Tests mit ScalaCheck macht."
+
+N: "Oh ja, das ist ja ganz ähnlich: hier oben haben wir das Assume, dann merken wir uns die Anzahl der Adressen, weisen die neue Adresse zu, und unser Assert besteht nur aus einem booleschen Ausdruck. Und das hier ist der Test für den Fall, dass die Adresse schon bekannt ist. Kannst Du diesen Test jetzt laufenlassen?"
+Testlauf: grün
+
+N: "Das ist ja interessant, da sind ja gar keine Datapoints angegeben."
+
+M: "Die kommen aus den Generatoren. Die sind woanders definiert."
+
+N: "Generatoren? Zeig mal!"
+
+M: "Das ist der Adress-Generator, der nimmt sich zwei zufällig erzeugte Strings und baut daraus eine neue Adresse."
+
+N: "Ach so, und hier lässt Du Dir eine Liste von 10 Adressen erzeugen."
+
+M: "Was dann tatsächlich benutzt wird, ist das hier, wo eine von den 10 Adressen zurückgegeben wird."
+
+N: "Und da unten?"
+
+M: "Da lassen wir uns wieder einen String geben und eine Zahl zwischen 0 und 6, und wir lassen uns so viele Adressen aus der Liste geben. Daraus wird dann eine neue Person erzeugt."
+
+N: "Und wozu ist das implicit gut?"
+
+M: "Darüber findet ScalaCheck die Generatoren."
+
+N: "Ach so, deswegen muss man die Datapoints nicht explizit hinschreiben."
+
+PAUSE - Trinken
+
+N: "Ja aber sag mal, Deine Adressverwaltung ist doch in Java, was nützt uns denn das ScalaCheck dafür? Gibts denn sowas nicht auch für Java?"
+
+M: "Es gibt ein paar Ansätze, das auch mit Java zu machen. Schau mal hier."
+PDF
+
+M: erläutert die ersten beiden Ansätze
+
+N: "Ich hab letztens doch mal von einem weiteren Ansatz gehört, JUnit-QuickCheck, schau mal hier."
+umblättern
+
+N erläutert den Ansatz
+
+N: "Wollen wir mal ausprobieren, ob wir das benutzen können für unsere Tests?"
+
+M: IDE
+
+N: "Erstmal schmeißen wir alle DataPoints weg und schreiben ForAll an alle Parameter."
+
+N: "Und dann brauchen wir noch Generatoren, genau wie in ScalaCheck."
+
+N: "Adressen können wir so generieren lassen.
+ Hier werden 10 Adressen erzeugt und gespeichert. 
+Hier kann man sich eine der Adressen geben lassen."
+
+M: "Ach so, und hier werden die Personen generiert. Die bekommen auch bis zu 6 Adressen."
+
+N: "Wollen wir die Tests mal laufenlassen?"
+Testlauf: grün
+
+N: "Also, fassen wir mal zusammen."
+
+N: "Nochmal zur Erinnerung: ScalaCheck stellt sicher, dass 100 erfolgreiche Testläufe stattgefunden haben."
+
+M: "JUnit-QuickCheck ..." TODO
+
+M+N: Fazit TODO
