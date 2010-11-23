@@ -1,0 +1,89 @@
+\part{Objekte}
+
+\begin{frame}{Eine User Story}
+\setbeamercolor{postit}{fg=black,bg=yellow!50} 
+\begin{beamercolorbox}[sep=1em,wd=8cm,shadow=true,rounded=true]{postit} 
+Als Benutzer möchte ich einer Person Adressen zuordnen können.\\[1em]
+Die Person soll jede Adresse nur einmal enthalten.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}{}
+\begin{center}
+DEMO
+\end{center}
+\end{frame}
+
+% Unit Test zeigen
+% Umformung von Unit Test in Theory
+
+% TODO Zwischenfolien mit Erklärungen
+% 1. Folie: 1 Person mit 2 Adressen - Erklärung für Verhalten aufgrund static @DataPoint
+
+% DEMO: ScalaCheck
+
+\begin{frame}{QuickCheck für Java?}
+	\begin{block}{QuickCheck (\href{https://quickcheck.dev.java.net/}{quickcheck.dev.java.net})}
+	\begin{itemize}
+		\item TODO
+	\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}{JCheck (\href{http://www.jcheck.org/}{jcheck.org})}
+	\begin{itemize}
+		\item TODO
+	\end{itemize}
+	\end{block}
+%TODO folie aufteilen
+	\pause
+	\begin{block}{JUnit-QuickCheck (\href{https://github.com/pholser/junit-quickcheck}{github.com/pholser/junit-quickcheck})}
+	\begin{itemize}
+		\item Eleganter neuer Ansatz
+		\item Benutzt JUnit Theories
+		\item Funktionalität bisher eher rudimentär
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+% DEMO: junit-quickcheck
+\begin{frame}{}
+\begin{center}
+DEMO
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Unterschiede}
+	\begin{block}{ScalaCheck}
+	\begin{itemize}
+		\item Generatoren erzeugen randomisierte Testwerte
+		\item Test ist grün nach 100 erfolgreichen Durchläufen
+		\item Test ist rot nach 500 unpassenden Eingaben
+	\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}{JUnit-QuickCheck}
+	\begin{itemize}
+		\item Generiert pro Parameter 100 Eingabewerte
+		\item Bei 2 Parametern 1000 Kombinationen, bei dreien 10000 usw.
+		\item Keine Garantie, dass mehr als eine Parameterkombination die Assumptions erfüllt
+		\item Wird kein passender Eingabewert gefunden, schlägt der Test fehl.
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Fazit}
+
+% \glqq{}An example can quickly lead a reader to an intuitive grasp of the desired functionality, but a theory helps make clear which aspects of the example are necessary, and which are arbitrary.\grqq{}
+% 
+% \hfill[Saff et.al.]
+
+\begin{description}[XX]
+\item[Was macht einen guten Unit Test aus?]\hfill\\\pause
+Er vermittelt durch \emph{Beispiele} schnell ein intuitives Verständnis.\pause
+\item[Was macht eine gute Spezifikation aus?]\hfill\\\pause
+Sie beschreibt die zugrundeliegenden Regeln durch \emph{Abstraktion}.\pause
+\item[Geht beides zusammen?]\hfill\\\pause
+Es gibt kein Entweder-oder, beide Teile sind wichtig.\pause
+\end{description}
+\end{frame}
