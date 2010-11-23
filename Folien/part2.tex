@@ -22,25 +22,27 @@ DEMO
 
 % DEMO: ScalaCheck
 
-\begin{frame}{QuickCheck für Java?}
-	\begin{block}{QuickCheck (\href{https://quickcheck.dev.java.net/}{quickcheck.dev.java.net})}
+\begin{frame}{QuickCheck für Java?}{Erste Ansätze}
+	\begin{block}{QuickCheck [\href{https://quickcheck.dev.java.net/}{quickcheck.dev.java.net}]}
 	\begin{itemize}
 		\item TODO
 	\end{itemize}
 	\end{block}
 	\pause
-	\begin{block}{JCheck (\href{http://www.jcheck.org/}{jcheck.org})}
+	\begin{block}{JCheck [\href{http://www.jcheck.org/}{jcheck.org}]}
 	\begin{itemize}
 		\item TODO
 	\end{itemize}
 	\end{block}
-%TODO folie aufteilen
-	\pause
-	\begin{block}{JUnit-QuickCheck (\href{https://github.com/pholser/junit-quickcheck}{github.com/pholser/junit-quickcheck})}
+\end{frame}
+\begin{frame}{QuickCheck für Java?}{Neuer Ansatz}
+	\begin{block}{JUnit-QuickCheck}
 	\begin{itemize}
 		\item Eleganter neuer Ansatz
-		\item Benutzt JUnit Theories
-		\item Funktionalität bisher eher rudimentär
+		\item Basiert auf JUnit Theories
+		\item Parameter werden mit \texttt{@Forall} annotiert
+		\item Vordefinierte Generatoren für Standard-Typen
+		\item Steckt noch in den Kinderschuhen
 	\end{itemize}
 	\end{block}
 \end{frame}
@@ -62,12 +64,12 @@ DEMO
 	\end{itemize}
 	\end{block}
 	\pause
-	\begin{block}{JUnit-QuickCheck} % TODO
+	\begin{block}{JUnit-QuickCheck}
 	\begin{itemize}
 		\item Generiert pro Parameter 100 Eingabewerte
-		\item Bei 2 Parametern 1000 Kombinationen, bei dreien 10000 usw.
-		\item Keine Garantie, dass mehr als eine Parameterkombination die Assumptions erfüllt
-		\item Wird kein passender Eingabewert gefunden, schlägt der Test fehl.
+		\item Bei 2 Parametern 10.000 Kombinationen, bei drei 1.000.000
+		\item Test ist grün, wenn alle passenden Eingaben erfolgreich sind
+		\item Test ist rot, wenn kein passender Eingabewert gefunden wurde
 	\end{itemize}
 	\end{block}
 \end{frame}
@@ -84,7 +86,7 @@ Er vermittelt durch \emph{Beispiele} schnell ein intuitives Verständnis.\pause
 \item[Was macht eine gute Spezifikation aus?]\hfill\\\pause
 Sie beschreibt die zugrundeliegenden Regeln durch \emph{Abstraktion}.\pause
 \item[Geht beides zusammen?]\hfill\\\pause
-Es gibt kein Entweder-oder, beide Teile sind wichtig.
+Es gibt kein Entweder-oder; beide Teile sind wichtig.
 \end{description}
 \end{frame}
 
