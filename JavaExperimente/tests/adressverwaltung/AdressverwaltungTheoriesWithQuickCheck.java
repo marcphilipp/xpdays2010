@@ -15,8 +15,7 @@ import com.pholser.junit.parameters.ForAll;
 public class AdressverwaltungTheoriesWithQuickCheck {
 
 	@Theory
-	public void assignUnknownAddressToPerson(@ForAll Person person,
-			@ForAll Address address) {
+	public void assignUnknownAddressToPerson(@ForAll Person person, @ForAll Address address) {
 		assumeFalse(person.knows(address));
 
 		int previousNumber = person.numberOfAddresses();
@@ -28,8 +27,7 @@ public class AdressverwaltungTheoriesWithQuickCheck {
 	}
 
 	@Theory
-	public void assignAlreadyKnownAddressToPerson(@ForAll Person person,
-			@ForAll Address address) {
+	public void assignAlreadyKnownAddressToPerson(@ForAll Person person, @ForAll Address address) {
 		assumeTrue(person.knows(address));
 
 		int previousNumber = person.numberOfAddresses();
