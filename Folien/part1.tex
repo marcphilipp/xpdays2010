@@ -106,14 +106,12 @@ Beispielwerte für f:
 \end{frame}
 
 \begin{frame}{Eine Alternative: Spezifikationen}
-Eine geeignete mathematische Spezifikation ist z. B.:
+Eine geeignete mathematische Spezifikation ist z.\,B.:
 \begin{eqnarray*}
 \forall x. \; \parbox{2cm}{$(x < 5$} &\Rightarrow& f(x) = 3) \\
 \land \; \parbox{2cm}{$(5 \leq x < 10$} &\Rightarrow& f(x) = 2)\\
 \land \; \parbox{2cm}{$(10 \leq x$} &\Rightarrow& f(x) = 4)
 \end{eqnarray*}
-
-Kann man so etwas als Unit-Test formulieren?
 \end{frame}
 
 % \begin{frame}
@@ -139,24 +137,23 @@ Kann man so etwas als Unit-Test formulieren?
 				\item Vorbedingung wird explizit angegeben
 				\item Assertion muss für alle Eingaben gelten, die die Vorbedingungen erfüllen
 			\end{itemize}
-		\item Eingabewerte müssen explizit angegeben werden
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Theories -- Wie sehen sie genau aus?}
-	\begin{itemize}
-		\item Neu seit JUnit Version 4.4
-		\item Parametrisierte Testmethode mit Vorbedingungen (Assumptions)
-			\begin{itemize}
-				\item \texttt{assumeThat()}
-				\item \texttt{assumeTrue()}
-				\item \texttt{assumeNotNull()}
-			\end{itemize}
-		\item \texttt{@Theory} statt \texttt{@Test}
-		\item Input für Testmethoden über \texttt{@DataPoint}(\texttt{s})-Annotation
-	\end{itemize}
-\end{frame}
+% \begin{frame}{Theories -- Wie sehen sie genau aus?}
+% 	\begin{itemize}
+% 		\item Neu seit JUnit Version 4.4
+% 		\item Parametrisierte Testmethode mit Vorbedingungen (Assumptions)
+% 			\begin{itemize}
+% 				\item \texttt{assumeThat()}
+% 				\item \texttt{assumeTrue()}
+% 				\item \texttt{assumeNotNull()}
+% 			\end{itemize}
+% 		\item \texttt{@Theory} statt \texttt{@Test}
+% 		\item Input für Testmethoden über \texttt{@DataPoint}(\texttt{s})-Annotation
+% 	\end{itemize}
+% \end{frame}
 
 
 \begin{frame}[fragile]{Theories für unsere Funktion}
@@ -182,7 +179,7 @@ public void values10OrGreater( double x ) {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Woher kommen die Testwerte?}
+\begin{frame}[fragile]{Woher kommen die Eingabewerte?}
 \begin{lstlisting}
 @DataPoint
 public static double VALUE1 = 1.0;
@@ -219,6 +216,6 @@ Das war's!
 \pause
 \vspace{.1cm}
 \begin{flushright}\Huge
-\itshape Oder?
+\itshape Wirklich?
 \end{flushright}
 \end{frame}
