@@ -1,8 +1,96 @@
+N: Wir sind der Meinung, dass man Unit Tests nicht nur zum Testen eines Moduls verwenden kann und sollte, sondern auch als Spezifikation seines gewünschten Verhaltens.
+
+M: D. h. vor allem wenn man sich in fremden Code einarbeitet, kann man sich zuerst die Tests anschauen, um schnell zu verstehen, wie der Code funktioniert.
+
+N: In diesem Vortrag wollen wir vorstellen, welche Möglichkeiten es gibt, Unit-Tests als gute Spezifikation einzusetzen.
+
+N: Schauen wir uns zum Beispiel mal eine Methode an.
+<umblättern>
+Diese Methode nimmt einen Double und liefert wieder einen Double zurück. Für Werte kleiner 5 liefert sie 3, für Werte zwischen 5 und 10 ist das Ergebnis 2, und für größere Werte gibt sie 4 zurück.
+
+M: Bei einem klassischen Unit-Test wählt man sich ein paar Werte aus und schaut, ob das Ergebnis den Erwartungen entspricht.
+<weiter>
+So sieht ein normaler Unit-Test dazu aus, der entspricht dieser Tabelle 1 zu 1.
+
+N: Was man bei diesem Unit-Test sieht, ist im Prinzip dies <weiter>.
+Wir prüfen die Funktion f nur an ganz wenigen Stellen.
+Aber es gibt viele Funktionen, die diese Tests erfüllen, nämlich zum Beispiel so eine <weiter> oder so eine <weiter>.
+Unsere Funktion sieht so aus <weiter> aber wenn man nur die Unit-Tests anschaut, kann man das nicht erkennen.
+
+<weiter>
+
+M: David Saff, einer der Hauptentwickler von JUnit, hat das Problem so formuliert:
+<vorlesen>
+Das heißt, dass der vorgestellte Unit-Test nicht ausreicht, um die Funktion an allen Stellen zu prüfen und auch zu verstehen.
+
+N: Könnte man nicht einfach mehr Punkte prüfen in dem Unit-Test?
+
+M: Nein, das skaliert ja nicht, denn man müsste im Prinzip ja beliebig viele Punkte testen.
+
+N: Wenn wir eine Spezifikation unserer Funktion haben wollen, dann könnten wir ja mal schauen, wie das die Mathematiker so machen.
+<weiter>
+Da sieht das dann so aus: Für alle x, die blabla.
+
+M: OK, können wir das jetzt irgendwie als Unit-Test schreiben?
+
+N: Ja, eine Möglichkeit sind JUnit Theories. Wir haben ja eben schon gesehen, dass normale Unit-Tests nur mit Beispielwerten arbeiten.
+Theories verallgemeinern eine Menge solcher Beispieltests. Man gibt explizit eine Vorbedingung an, und nur wenn diese Vorbedingung erfüllt ist, dann wird der Test ausgeführt.
+
+M: Wie sieht das denn konkret für unser Beispiel aus?
+
+N: Schau mal hier, ich hab das mal aufgeschrieben. Statt Test schreibt man Theory, und die Testmethode bekommt dann einen Parameter übergeben. 
+
+M: Ah, und mit assumeTrue gibt man dann die Vorbedingung an.
+
+N: Ja genau.
+
+M: OK, der erste Test sagt dann also: wenn x kleiner als 5, dann ist f(x) kleiner 3. 
+
+N: Ja, das sieht doch jetzt schon fast so aus wie unsere mathematische Spezifikation, oder?
+
+M: Ja, und wo kommen die Eingabewerte her?
+
+N: Tja, das ist leider ein Nachteil von Theories: Die muss man immer noch mit der Hand angeben.
+
+M: OK, das heißt wir haben jetzt schon eine brauchbare Spezifikation, die man gut verstehen kann, aber das eigentliche Testen des Verhaltens läuft noch genauso anhand von Beispielen ab wie vorher.
+
+N: Das stimmt. Allerdings gibt es in funktionalen Sprachen Bibliotheken, die die Eingabewerte automatisch generieren. Zum Beispiel gibt es  in Scala eine Bibliothek namens ScalaCheck. Die zeig ich Dir mal.
+
+M: in IDE, Funktion-F-Test.
+
+N: Guck mal hier, so sehen unsere Tests in Scala aus. 
+
+M: Ach, das sieht ja fast so aus wie unsere mathematische Spezifikation. Und wie funktioniert das jetzt?
+
+N: Die Werte werden automatisch generiert, und es müssen 100 erfolgreiche Testläufe stattfinden, damit der Test grün wird.
+Wenn 500 Werte generiert wurden, die die Vorbedingung nicht erfüllen, schlägt der Test fehl.
+
+M: Ich lass die Tests mal laufen. Oh, da schlägt ja einer fehl.
+
+N: Was sagt denn die Fehlermeldung?
+
+M: "Gave up after .... "
+
+N: Ach ja, das ist ja genau was ich eben beschrieben hab. Es ist natürlich ziemlich schwierig, bei beliebigen Doubles genügend viele zu generieren, die zwischen 5 und 10 liegen.
+
+M: Kann man die Werte, die generiert werden, irgendwie einschränken?
+
+N: Ja, man kann einen eigenen Generator angeben. Ich hab da schon was vorbereitet...
+
+M: Ja, stimmt, jetzt sind die Tests grün!
+
+N: Lass uns also nochmal zusammenfassen:
+
+M: macht Zusammenfassung
+
+<weiter>
+-------------------
+
 N: "So, das war's"
 
-M: zeigt "Oder?"
+M: zeigt "Wirklich?"
 
-N: "Oder? Was meinst Du denn damit?"
+N: "Wirklich? Was meinst Du denn damit?"
 
 M: "Das war ein schönes Beispiel, aber was mach ich im echten Leben? Da hab ich Objekte!" blättert um
 
