@@ -23,6 +23,31 @@ Beispielwerte für f:
 }
 \end{minipage} 
 \hfill
+
+\end{frame}
+\begin{frame}[t,fragile]{Eine einfache Funktion} % Version 2
+\begin{lstlisting}
+public double f ( double x ) {
+   if( x < 5.0 ) return 3.0;
+   else if( x < 10.0 ) return 2.0;
+   else return 4.0;
+}
+\end{lstlisting}
+
+\begin{minipage}[t]{3.5cm}
+~ \\
+Beispielwerte für f:
+
+~ \\
+\begin{tabular}{|c|c|}
+\textbf{x} & \textbf{f( x )}  \\ \hline
+1 & 3  \\
+3 & 3  \\
+7 & 2  \\
+12 & 4
+\end{tabular} 
+\end{minipage} 
+\hfill
 \begin{minipage}[t]{7cm}
 Unit-Tests für f:
 
@@ -38,7 +63,7 @@ Unit-Tests für f:
 
 \end{frame}
 
-\begin{frame}[t,fragile]{Eine einfache Funktion} % Version 2
+\begin{frame}[t,fragile]{Eine einfache Funktion} % Version 3
 \begin{lstlisting}
 public double f ( double x ) {
    if( x < 5.0 ) return 3.0;
