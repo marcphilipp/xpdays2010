@@ -20,11 +20,9 @@ class FunktionFTest extends Spec with Checkers {
     }
 
     it("returns 2 for inputs between 5 and 10") {
-      check(
-        //        forAll(Gen.choose(5.0, 10.0))(
+      check(forAll(Gen.choose(5.0, 10.0))(
         (x: Double) =>
-          ((5.0 <= x) && (x < 10.0)) ==> (f(x) == 2.0))
-      //)
+          ((5.0 <= x) && (x < 10.0)) ==> (f(x) == 2.0)))
     }
 
     it("returns 4 for inputs >= 10") {
@@ -33,3 +31,5 @@ class FunktionFTest extends Spec with Checkers {
     }
   }
 }
+
+//        forAll(Gen.choose(5.0, 10.0))(
