@@ -34,16 +34,19 @@ DEMO
 
 % DEMO: ScalaCheck
 
-\begin{frame}{QuickCheck für Java?}{Erste Ansätze}
-	\begin{block}{QuickCheck [\href{https://quickcheck.dev.java.net/}{quickcheck.dev.java.net}]}
+\begin{frame}{ScalaCheck für Java?}{Erste Ansätze}
+	\begin{block}{QuickCheck-Portierung [\href{https://quickcheck.dev.java.net/}{quickcheck.dev.java.net}]}
 	\begin{itemize}
-		\item TODO
+		\item Stellt Generatoren für Standardtypen zur Verfügung
+		\item Benutzung über \texttt{for}-Schleifen im Unit Test
 	\end{itemize}
 	\end{block}
 	\pause
 	\begin{block}{JCheck [\href{http://www.jcheck.org/}{jcheck.org}]}
 	\begin{itemize}
-		\item TODO
+		\item Generatoren müssen an jedem Test angegeben werden
+		\item Verschachtelte Annotations
+		\item Keine Wiederverwendung von Theories
 	\end{itemize}
 	\end{block}
 \end{frame}
