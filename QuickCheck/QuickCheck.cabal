@@ -1,7 +1,0 @@
-name:     QuickCheck
-version:  0.1
-
-executable QuickCheck
-  hs-source-dirs:  src
-  main-is:         Main.hs
-
