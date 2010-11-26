@@ -44,7 +44,7 @@ M: Ah, und mit assumeTrue gibt man dann die Vorbedingung an.
 
 N: Ja genau.
 
-M: OK, der erste Test sagt dann also: wenn x kleiner als 5, dann ist f(x) kleiner 3. 
+M: OK, der erste Test sagt dann also: wenn x kleiner als 5, dann ist f(x) = 3. 
 
 N: Ja, das sieht doch jetzt schon fast so aus wie unsere mathematische Spezifikation, oder?
 
